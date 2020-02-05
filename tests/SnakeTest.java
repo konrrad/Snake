@@ -30,24 +30,24 @@ public class SnakeTest {
         assertTrue(map.gameover);
     }
 
-    @Test
-    public void changeOrientation()
-    {
-        Map map=new Map(new Vector2D(10,10));
-        Snake s=map.snake;
-        map.snake.changeOrientation(Direction.LEFT);
-        assertEquals(Orientation.WEST,s.getOrientation());
-        map.snake.changeOrientation(Direction.LEFT);
-        assertEquals(Orientation.SOUTH,s.getOrientation());
-        map.snake.changeOrientation(Direction.RIGHT);
-        assertEquals(Orientation.WEST,s.getOrientation());
-        map.snake.changeOrientation(Direction.LEFT);
-        assertEquals(Orientation.SOUTH,s.getOrientation());
-        map.snake.changeOrientation(Direction.LEFT);
-        assertEquals(Orientation.EAST,s.getOrientation());
-        map.snake.changeOrientation(Direction.LEFT);
-        assertEquals(Orientation.NORTH,s.getOrientation());
-    }
+//    @Test
+//    public void changeOrientation()
+//    {
+//        Map map=new Map(new Vector2D(10,10));
+//        Snake s=map.snake;
+//        map.snake.changeOrientation(Direction.LEFT);
+//        assertEquals(Orientation.WEST,s.getOrientation());
+//        map.snake.changeOrientation(Direction.LEFT);
+//        assertEquals(Orientation.SOUTH,s.getOrientation());
+//        map.snake.changeOrientation(Direction.RIGHT);
+//        assertEquals(Orientation.WEST,s.getOrientation());
+//        map.snake.changeOrientation(Direction.LEFT);
+//        assertEquals(Orientation.SOUTH,s.getOrientation());
+//        map.snake.changeOrientation(Direction.LEFT);
+//        assertEquals(Orientation.EAST,s.getOrientation());
+//        map.snake.changeOrientation(Direction.LEFT);
+//        assertEquals(Orientation.NORTH,s.getOrientation());
+//    }
 
     @Test
     public void move2()

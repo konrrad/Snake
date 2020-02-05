@@ -17,8 +17,8 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
     private final Snake snake;
     private static final int MAP_WIDTH=10;
     private static final int MAP_HEIGHT=10;
-    private final int step=1000;
-    private Timer timer;
+    private static final int step=900;
+    private final Timer timer;
 
 
     public MapPanel()  {
@@ -28,8 +28,6 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
         snake=map.snake;
         timer=new Timer(step,this);
         timer.start();
-
-
     }
 
     @Override
@@ -49,8 +47,8 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
             return;
         }
 
-        final int widthScale=Math.round(width/MAP_WIDTH);
-        final int heightScale=Math.round(height/MAP_HEIGHT);
+        final int widthScale=width/MAP_WIDTH;
+        final int heightScale=height/MAP_HEIGHT;
 
 
         this.setLocation(0,0);
@@ -59,20 +57,15 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
         g.fillRect(0,0,width,height);
 
         g.setColor(Color.RED);
-        g.fillOval(this.map.singlePart.position.x*widthScale,this.map.singlePart.position.y*heightScale,widthScale/4,heightScale/4);
+        g.fillOval(this.map.getSinglePartPosition().x*widthScale,this.map.getSinglePartPosition().y*heightScale,widthScale/4,heightScale/4);
 
         g.setColor(Color.BLACK);
         g.fillRect(snake.head.position.x*widthScale,snake.head.position.y*heightScale,widthScale/4,heightScale/4);
         if(!snake.tail.isEmpty())
         {
             snake.tail.forEach(element->
-                    {
-                        System.out.println(element.position);
-
-                        g.fillOval(element.position.x*widthScale,element.position.y*heightScale,widthScale/4,heightScale/4);
-                    }
-                    );
-            System.out.println("====================");
+                        g.fillOval(element.position.x*widthScale,element.position.y*heightScale,
+                                widthScale/4,heightScale/4));
         }
     }
 
@@ -82,6 +75,7 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
         {
             this.timer.stop();
             this.repaint();
+            return;
         }
         this.snake.move();
         this.repaint();

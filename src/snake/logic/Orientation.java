@@ -27,6 +27,6 @@ public enum Orientation {
         else if(this==EAST) return new Vector2D(1,0);
         else if(this==SOUTH) return new Vector2D(0,-1);
         else if(this==WEST) return new Vector2D(-1,0);
-        return null;
+        else throw new IllegalArgumentException("Orientation can't be null.");
     }
 }

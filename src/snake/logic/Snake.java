@@ -25,19 +25,17 @@ public class Snake {
 
     }
 
-    //@TODO delete? -- used for testing
-    public Orientation getOrientation()
-    {
-        return orientation;
-    }
+    // used for testing
+    //public Orientation getOrientation()
+//    {
+//        return orientation;
+//    }
     public void move()
     {
         if(isSelfKilled())
         {
             this.map.gameOver();
         }
-        //@TODO mistake???
-        if(orientation.toUnitVector() == null) throw new IllegalArgumentException("Cannot move when orientation is null");
         Vector2D directionOfMove=orientation.toUnitVector();
         Vector2D olderElementPosition=head.position;
         Vector2D tmp=null;
@@ -60,7 +58,7 @@ public class Snake {
         return this.tail.stream().anyMatch(element->element.position.equals(head.position));
     }
 
-    public void appendPart(SnakePart singlePart) {
+    public void appendPart() {
         tail.addFirst(head);
         Vector2D headPosition=head.position;
         head=new SnakePart(headPosition.add(this.orientation.toUnitVector()));

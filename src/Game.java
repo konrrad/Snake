@@ -2,7 +2,15 @@ import snake.GUI.StartingPanel;
 
 public class Game {
     public static void main(String[] args) {
-        StartingPanel startingPanel=new StartingPanel();
+        try
+        {
+            StartingPanel startingPanel=new StartingPanel();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
 
     }
 }

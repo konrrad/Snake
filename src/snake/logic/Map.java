@@ -6,7 +6,7 @@ public class Map  {
     public final Snake snake;
     public final Vector2D size;
     private final Random randomizer=new Random();
-    public SnakePart singlePart;
+    private SnakePart singlePart;
     public boolean gameover=false;
 
 
@@ -44,7 +44,7 @@ public class Map  {
             this.gameOver();
         if(this.snake.head.position.equals(this.singlePart.position))
         {
-            this.snake.appendPart(this.singlePart);
+            this.snake.appendPart();
             this.singlePart=createSinglePart();
         }
     }
@@ -56,8 +56,9 @@ public class Map  {
     public void gameOver()
     {
         gameover=true;
-        System.out.println(gameover);
-
+    }
+    public Vector2D getSinglePartPosition(){
+        return this.singlePart.position;
     }
 
 
