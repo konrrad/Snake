@@ -13,8 +13,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class MapPanel extends JPanel implements ActionListener, KeyListener{
-    public final Map map;
-    final Snake snake;
+    private final Map map;
+    private final Snake snake;
     private static final int MAP_WIDTH=10;
     private static final int MAP_HEIGHT=10;
     private final int step=1000;
@@ -38,6 +38,17 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
         super.paintComponent(g);
         final int width=this.getWidth();
         final int height=this.getHeight();
+        if(this.map.gameover)
+        {
+            this.removeAll();
+            g.setColor(Color.RED);
+            g.setFont(Font.getFont(Font.SANS_SERIF));
+            g.setFont(g.getFont().deriveFont(30.0f));
+
+            g.drawString("GAME OVER! SCORE: "+(snake.tail.size()+1),width/3,height/2);
+            return;
+        }
+
         final int widthScale=Math.round(width/MAP_WIDTH);
         final int heightScale=Math.round(height/MAP_HEIGHT);
 
@@ -51,7 +62,7 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
         g.fillOval(this.map.singlePart.position.x*widthScale,this.map.singlePart.position.y*heightScale,widthScale/4,heightScale/4);
 
         g.setColor(Color.BLACK);
-        g.fillOval(snake.head.position.x*widthScale,snake.head.position.y*heightScale,widthScale/4,heightScale/4);
+        g.fillRect(snake.head.position.x*widthScale,snake.head.position.y*heightScale,widthScale/4,heightScale/4);
         if(!snake.tail.isEmpty())
         {
             snake.tail.forEach(element->
@@ -67,7 +78,11 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        if(this.map.gameover)
+        {
+            this.timer.stop();
+            this.repaint();
+        }
         this.snake.move();
         this.repaint();
     }

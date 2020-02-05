@@ -1,16 +1,12 @@
 package snake.logic;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.Timer;
 
 public class Map  {
     public final Snake snake;
     public final Vector2D size;
     private final Random randomizer=new Random();
     public SnakePart singlePart;
-
     public boolean gameover=false;
 
 
@@ -48,7 +44,7 @@ public class Map  {
             this.gameOver();
         if(this.snake.head.position.equals(this.singlePart.position))
         {
-            this.snake.tail.add(this.singlePart);
+            this.snake.appendPart(this.singlePart);
             this.singlePart=createSinglePart();
         }
     }
@@ -57,11 +53,10 @@ public class Map  {
         return position.x>=0&&position.y>=0&&position.x<this.size.x
                 &&position.y<this.size.y;
     }
-    private void gameOver()
+    public void gameOver()
     {
         gameover=true;
         System.out.println(gameover);
-
 
     }
 

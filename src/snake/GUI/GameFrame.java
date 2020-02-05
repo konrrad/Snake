@@ -1,20 +1,16 @@
 package snake.GUI;
-
-import snake.logic.Direction;
-
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 
 public class GameFrame {
-    JFrame frame;
+    private final JFrame frame;
     private static final int WIDTH=800;
     private static final int HEIGHT=800;
-    MapPanel mapPanel;
+    private final MapPanel mapPanel;
 
 
     public GameFrame() {
-        frame=new JFrame("Snake-gameFrame");
+        frame=new JFrame("Snake");
         this.frame.setSize(WIDTH,HEIGHT);
         this.mapPanel=new MapPanel();
         this.frame.add(mapPanel);

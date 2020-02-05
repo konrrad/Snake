@@ -14,10 +14,9 @@ public class Vector2D {
     {
         return "Vector: ("+x+","+y+")";
     }
-    public void add(Vector2D v)
+    public Vector2D add(Vector2D v)
     {
-        x+=v.x;
-        y+=v.y;
+        return new Vector2D(x+v.x,y+v.y);
     }
 
     @Override

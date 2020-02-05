@@ -1,11 +1,10 @@
 package snake.logic;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class Snake {
-    public final SnakePart head;
-    public final List<SnakePart> tail;
+    public SnakePart head;
+    public final LinkedList<SnakePart> tail;
     private final Map map;
     private Orientation orientation;
 
@@ -33,23 +32,38 @@ public class Snake {
     }
     public void move()
     {
+        if(isSelfKilled())
+        {
+            this.map.gameOver();
+        }
         //@TODO mistake???
         if(orientation.toUnitVector() == null) throw new IllegalArgumentException("Cannot move when orientation is null");
-        Vector2D direction=orientation.toUnitVector();
-        SnakePart previous=head;
-        SnakePart temp=null;
-        head.position.add(direction);
+        Vector2D directionOfMove=orientation.toUnitVector();
+        Vector2D olderElementPosition=head.position;
+        Vector2D tmp=null;
+        head.position=head.position.add(directionOfMove);
         if(!this.tail.isEmpty())
         {
             for(SnakePart element:this.tail)
             {
-                temp=element;
-                element.position=previous.position;
-                previous=temp;
+                tmp=element.position;
+                element.position=olderElementPosition;
+                olderElementPosition=tmp;
             }
         }
 
 
         this.map.positionChanged();
+    }
+
+    private boolean isSelfKilled() {
+        return this.tail.stream().anyMatch(element->element.position.equals(head.position));
+    }
+
+    public void appendPart(SnakePart singlePart) {
+        tail.addFirst(head);
+        Vector2D headPosition=head.position;
+        head=new SnakePart(headPosition.add(this.orientation.toUnitVector()));
+
     }
 }
