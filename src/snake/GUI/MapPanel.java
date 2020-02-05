@@ -17,7 +17,7 @@ public class MapPanel extends JPanel implements ActionListener, KeyListener{
     private final Snake snake;
     private static final int MAP_WIDTH=10;
     private static final int MAP_HEIGHT=10;
-    private static final int step=900;
+    private static final int step=1000;
     private final Timer timer;
 
 
